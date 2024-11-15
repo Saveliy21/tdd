@@ -16,7 +16,7 @@ public class Spiral
         angle = 0;
     }
 
-    public Point getNextPointOnSpiral()
+    public Point GetNextPointOnSpiral()
     {
         angle += angleStep;
         var x = (int) (center.X + angle * Math.Cos(angle));
