@@ -5,11 +5,11 @@ namespace TagsCloudVisualization;
 public class Spiral
 {
     private readonly Point center;
-    private readonly int angleStep;
+    private readonly double angleStep;
     private double angle;
 
 
-    public Spiral(Point center, int angleStep = 1)
+    public Spiral(Point center, double angleStep = 0.01)
     {
         this.center = center;
         this.angleStep = angleStep;
