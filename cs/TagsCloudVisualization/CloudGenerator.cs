@@ -6,7 +6,8 @@ public static class CloudGenerator
 {
     public static List<Rectangle> GenerateRectangles(int count)
     {
-        CircularCloudLayouter circularCloudLayouter = new CircularCloudLayouter(new Point(500, 500));
+        CircularCloudLayouter circularCloudLayouter =
+            new CircularCloudLayouter(new Point(CloudLayouterConst.CloudCentreX, CloudLayouterConst.CloudCentreY));
         Random rnd = new Random();
         for (int i = 0; i < count; i++)
         {
