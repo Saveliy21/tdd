@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using FluentAssertions;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 namespace TagsCloudVisualization.TagsCloudVisualizationTests;
 
@@ -11,7 +12,19 @@ public class CircularCloudLayotherTest
     [SetUp]
     public void SetUp()
     {
-        _circularCloudLayouter = new CircularCloudLayouter(new Point());
+        
+        _circularCloudLayouter =
+            new CircularCloudLayouter(new Point(CloudLayouterConst.CloudCentreX, CloudLayouterConst.CloudCentreY));
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed) return;
+        var testName = TestContext.CurrentContext.Test.Name;
+        var filePath = TestContext.CurrentContext.WorkDirectory;
+        CloudGenerator.DrawRectangles(_circularCloudLayouter.GetRectangles(), $"{testName}.png");
+        Console.WriteLine($"Tag cloud visualization saved to file  {filePath}");
     }
 
     [TestCase(-2, 3, TestName = "Negative width")]
@@ -23,7 +36,7 @@ public class CircularCloudLayotherTest
         Action action = () => new CircularCloudLayouter(new Point()).PutNextRectangle(new Size(width, height));
         action.Should().Throw<ArgumentException>();
     }
-    
+
     [TestCase(2, 3, TestName = "positive width and height")]
     public void PutNextRectangle_ShouldNotThrowArgumentException_WithCorrectInput(int width, int height)
     {
@@ -34,17 +47,21 @@ public class CircularCloudLayotherTest
     [Test]
     public void PutNextRectangle_ShouldAddNewRectangle()
     {
-        _circularCloudLayouter.PutNextRectangle(new Size(2, 2));
+        var size = new Size(10, 20);
+        var coordinateX = CloudLayouterConst.CloudCentreX - size.Width / 2;
+        var coordinateY = CloudLayouterConst.CloudCentreY - size.Height / 2;
+        _circularCloudLayouter.PutNextRectangle(size);
         _circularCloudLayouter.GetRectangles().Should().NotBeEmpty();
-        _circularCloudLayouter.GetRectangles().Should().Contain(new Rectangle(-1, -1, 2, 2));
+        _circularCloudLayouter.GetRectangles().Should()
+            .Contain(new Rectangle(coordinateX, coordinateY, size.Width, size.Height));
     }
-    
+
     [Test]
     public void CircularCloudLayouter_RectAngelsListShouldHaveCorrectSize()
     {
-        _circularCloudLayouter.PutNextRectangle(new Size(2, 2));
-        _circularCloudLayouter.PutNextRectangle(new Size(2, 2));
-        _circularCloudLayouter.PutNextRectangle(new Size(2, 2));
+        _circularCloudLayouter.PutNextRectangle(new Size(40, 20));
+        _circularCloudLayouter.PutNextRectangle(new Size(20, 40));
+        _circularCloudLayouter.PutNextRectangle(new Size(50, 50));
         _circularCloudLayouter.GetRectangles().Count.Should().Be(3);
     }
 
@@ -54,8 +71,8 @@ public class CircularCloudLayotherTest
         Random rnd = new Random();
         for (int i = 0; i < 100; i++)
         {
-            int width = rnd.Next(1, 10);
-            int height = rnd.Next(1, 10);
+            int width = rnd.Next(15, 40);
+            int height = rnd.Next(15, 40);
             _circularCloudLayouter.PutNextRectangle(new Size(width, height));
         }
 
