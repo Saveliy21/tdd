@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using TagsCloudVisualization;
+﻿using TagsCloudVisualization;
+
 const string fileName1 = "Rectangles 50.png";
 const string fileName2 = "Rectangles 100.png";
 const string fileName3 = "Rectangles 400.png";
