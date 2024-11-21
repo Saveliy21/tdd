@@ -23,8 +23,9 @@ public class CircularCloudLayotherTest
         if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed) return;
         var testName = TestContext.CurrentContext.Test.Name;
         var filePath = TestContext.CurrentContext.WorkDirectory;
-        CloudGenerator.DrawRectangles(_circularCloudLayouter.GetRectangles(), $"{testName}.png");
-        Console.WriteLine($"Tag cloud visualization saved to file  {filePath}");
+        SaveImages.SaveImage(CloudDrawer.DrawRectangles(_circularCloudLayouter.GetRectangles()),
+            $"{testName}.png");
+        Console.WriteLine($"Tag cloud visualization saved to file  {filePath}/{testName}.png");
     }
 
     [TestCase(-2, 3, TestName = "Negative width")]
