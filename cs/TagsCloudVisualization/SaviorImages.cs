@@ -2,7 +2,7 @@
 
 namespace TagsCloudVisualization;
 
-public class SaveImages
+public class SaviorImages
 {
     public static void SaveImage(Bitmap bmp, string fileName)
     {
