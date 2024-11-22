@@ -5,7 +5,7 @@ using static System.IO.File;
 
 namespace TagsCloudVisualization.TagsCloudVisualizationTests;
 
-public class CloudDrawerTest
+public class DrawRectanglesTest
 {
     private const string FileName = "Picture.png";
 
@@ -23,7 +23,7 @@ public class CloudDrawerTest
     {
         List<Rectangle> rectangles = new List<Rectangle>();
         rectangles.Add(new Rectangle(500, 500, 100, 100));
-        SaveImages.SaveImage(CloudDrawer.DrawRectangles(rectangles), FileName);
+        SaviorImages.SaveImage(CloudDrawer.DrawRectangles(rectangles, new Size(700, 700)), FileName);
         Exists(FileName).Should().BeTrue();
     }
 }
