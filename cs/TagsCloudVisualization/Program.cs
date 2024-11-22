@@ -1,20 +1,20 @@
 ﻿using System.Drawing;
 using TagsCloudVisualization;
 
-const string fileName1 = "Rectangles 50.png";
-const string fileName2 = "Rectangles 100.png";
-const string fileName3 = "Rectangles 400.png";
+List<int> countOfRectangles = new List<int>() {50, 100, 400};
 
-
-SaveImages.SaveImage(CloudDrawer.DrawRectangles(GenerateRectangles(50)), fileName1);
-SaveImages.SaveImage(CloudDrawer.DrawRectangles(GenerateRectangles(100)), fileName2);
-SaveImages.SaveImage(CloudDrawer.DrawRectangles(GenerateRectangles(400)), fileName3);
-
-
-static List<Rectangle> GenerateRectangles(int count)
+foreach (var i in countOfRectangles)
 {
     CircularCloudLayouter circularCloudLayouter =
         new CircularCloudLayouter(new Point(CloudLayouterConst.CloudCentreX, CloudLayouterConst.CloudCentreY));
+    var current = GenerateRectangles(i, circularCloudLayouter);
+    var size = circularCloudLayouter.getCloudSize();
+    SaviorImages.SaveImage(CloudDrawer.DrawRectangles(current, size), $"Rectangles {i}.png");
+}
+
+
+static List<Rectangle> GenerateRectangles(int count, CircularCloudLayouter circularCloudLayouter)
+{
     Random rnd = new Random();
     for (int i = 0; i < count; i++)
     {
