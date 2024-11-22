@@ -9,7 +9,7 @@ foreach (var i in countOfRectangles)
         new CircularCloudLayouter(new Point(CloudLayouterConst.CloudCentreX, CloudLayouterConst.CloudCentreY));
     var current = GenerateRectangles(i, circularCloudLayouter);
     var size = circularCloudLayouter.getCloudSize();
-    SaviorImages.SaveImage(CloudDrawer.DrawRectangles(current, size), $"Rectangles {i}.png");
+    CloudDrawer.DrawRectangles(current, size, $"Rectangles {i}.png");
 }
 
 

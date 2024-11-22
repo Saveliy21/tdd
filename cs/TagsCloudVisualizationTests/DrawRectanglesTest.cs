@@ -23,7 +23,7 @@ public class DrawRectanglesTest
     {
         List<Rectangle> rectangles = new List<Rectangle>();
         rectangles.Add(new Rectangle(500, 500, 100, 100));
-        SaviorImages.SaveImage(CloudDrawer.DrawRectangles(rectangles, new Size(700, 700)), FileName);
+        CloudDrawer.DrawRectangles(rectangles, new Size(700, 700), FileName);
         Exists(FileName).Should().BeTrue();
     }
 }
