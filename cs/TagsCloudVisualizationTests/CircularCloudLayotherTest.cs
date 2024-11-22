@@ -24,8 +24,7 @@ public class CircularCloudLayotherTest
         var filePath = TestContext.CurrentContext.WorkDirectory;
         var rectangles = _circularCloudLayouter.GetRectangles();
         var size = _circularCloudLayouter.getCloudSize();
-        CloudDrawer.DrawRectangles(rectangles, size,
-            $"{testName}.png");
+        CloudDrawer.DrawRectangles(rectangles, size, $"{testName}.png");
         Console.WriteLine($"Tag cloud visualization saved to file  {filePath}/{testName}.png");
     }
 
