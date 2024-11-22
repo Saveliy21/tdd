@@ -4,9 +4,9 @@ namespace TagsCloudVisualization;
 
 public static class CloudDrawer
 {
-    public static Bitmap DrawRectangles(List<Rectangle> rectangles, Size size)
-    { 
-        var bmp = new Bitmap(size.Width, size.Height);
+    public static void DrawRectangles(List<Rectangle> rectangles, Size size, string fileName)
+    {
+        using var bmp = new Bitmap(size.Width, size.Height);
         using var newGraphics = Graphics.FromImage(bmp);
         using var backgroundBrush = new SolidBrush(Color.White);
         using var rectanglePen = new Pen(Color.Black);
@@ -15,6 +15,7 @@ public static class CloudDrawer
         {
             newGraphics.DrawRectangle(rectanglePen, rectangle);
         }
-        return bmp;
+
+        bmp.Save(fileName);
     }
 }
