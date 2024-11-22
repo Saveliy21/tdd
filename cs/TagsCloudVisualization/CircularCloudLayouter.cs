@@ -34,6 +34,15 @@ public class CircularCloudLayouter : ICircularCloudLayouter
         return rectangle;
     }
 
+    public Size getCloudSize()
+    {
+        var left = rectangles.Min(x => x.Left);
+        var right = rectangles.Max(x => x.Right);
+        var top = rectangles.Min(x => x.Top);
+        var bottom = rectangles.Max(x => x.Bottom);
+        var size = new Size( Math.Abs(right) + Math.Abs(left),Math.Abs(bottom) + Math.Abs(top));
+        return size;
+    }
     public List<Rectangle> GetRectangles()
     {
         return rectangles;
