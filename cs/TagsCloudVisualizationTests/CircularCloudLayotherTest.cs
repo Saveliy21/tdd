@@ -12,7 +12,6 @@ public class CircularCloudLayotherTest
     [SetUp]
     public void SetUp()
     {
-        
         _circularCloudLayouter =
             new CircularCloudLayouter(new Point(CloudLayouterConst.CloudCentreX, CloudLayouterConst.CloudCentreY));
     }
@@ -23,7 +22,9 @@ public class CircularCloudLayotherTest
         if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed) return;
         var testName = TestContext.CurrentContext.Test.Name;
         var filePath = TestContext.CurrentContext.WorkDirectory;
-        SaveImages.SaveImage(CloudDrawer.DrawRectangles(_circularCloudLayouter.GetRectangles()),
+        var rectangles = _circularCloudLayouter.GetRectangles();
+        var size = _circularCloudLayouter.getCloudSize();
+        SaviorImages.SaveImage(CloudDrawer.DrawRectangles(rectangles, size),
             $"{testName}.png");
         Console.WriteLine($"Tag cloud visualization saved to file  {filePath}/{testName}.png");
     }
