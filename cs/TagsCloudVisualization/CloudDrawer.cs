@@ -4,19 +4,17 @@ namespace TagsCloudVisualization;
 
 public static class CloudDrawer
 {
-    public static Bitmap DrawRectangles(List<Rectangle> rectangles)
-    {
-        Bitmap bmp = new Bitmap(1000, 1000);
-        Graphics newGraphics = Graphics.FromImage(bmp);
-        var backgroundBrush = new SolidBrush(Color.White);
-        var rectanglePen = new Pen(Color.Black);
-        newGraphics.FillRectangle(backgroundBrush, 0, 0, 1000, 1000);
+    public static Bitmap DrawRectangles(List<Rectangle> rectangles, Size size)
+    { 
+        var bmp = new Bitmap(size.Width, size.Height);
+        using var newGraphics = Graphics.FromImage(bmp);
+        using var backgroundBrush = new SolidBrush(Color.White);
+        using var rectanglePen = new Pen(Color.Black);
+        newGraphics.FillRectangle(backgroundBrush, 0, 0, size.Width, size.Height);
         foreach (var rectangle in rectangles)
         {
             newGraphics.DrawRectangle(rectanglePen, rectangle);
         }
-
-        newGraphics.Dispose();
         return bmp;
     }
 }
